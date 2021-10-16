@@ -12,4 +12,8 @@ class File
   def valid_path?
     File.exist?(@file_path)
   end
+
+  def extension
+    File.extname(@file_path).downcase
+  end
 end
