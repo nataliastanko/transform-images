@@ -11,7 +11,7 @@ class Image < FileHandler
   def initialize(file_path)
     super
     @image = MiniMagick::Image.open(@file_path)
-    valid_image?
+    validate_image
   end
 
   def metadata
@@ -22,12 +22,12 @@ class Image < FileHandler
     { width: @image.width, height: @image.height }
   end
 
+  private
+
   # raises MiniMagick::Invalid if not supported by imagemagic
   # raises StandardError if not in app accepted format
-  def valid_image?
+  def validate_image
     @image.validate!
     raise StandardError, 'File format not accepted' unless ACCEPTED_FORMATS.include? @image.type
-
-    true
   end
 end

@@ -9,20 +9,23 @@ RSpec.describe Image do
   let(:pdf) { described_class.new('data/pdf/ImageMagick.pdf') }
   let(:txt) { described_class.new('data/text/file.txt') }
 
-  describe '#valid_image?' do
-    context 'when input file is an image' do
-      it 'returns true' do
-        expect(image_books.valid_image?).to eq true
-        expect(image_holborn.valid_image?).to eq true
-        expect(image_brighton.valid_image?).to eq true
-      end
+  context 'when input file is a recognised image' do
+    it 'successfully creates object' do
+      expect(image_books).to be_a Image
+      expect(image_holborn).to be_a Image
+      expect(image_brighton).to be_a Image
     end
 
-    context 'when input file is not an image' do
-      it 'returns false' do
-        expect { pdf.image? }.to raise_error(StandardError)
-        expect { txt.image? }.to raise_error(MiniMagick::Invalid)
+    context 'when input file does not have the app accepted format' do
+      it 'raises exception' do
+        expect { pdf }.to raise_error(StandardError)
       end
+    end
+  end
+
+  context 'when input file is not a recognised image' do
+    it 'raises exception' do
+      expect { txt }.to raise_error(MiniMagick::Invalid)
     end
   end
 
