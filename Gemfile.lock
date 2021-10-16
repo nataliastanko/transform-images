@@ -3,6 +3,7 @@ GEM
   specs:
     ast (2.4.2)
     diff-lcs (1.4.4)
+    mini_magick (4.11.0)
     parallel (1.21.0)
     parser (3.0.2.0)
       ast (~> 2.4.1)
@@ -40,6 +41,7 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
+  mini_magick
   rspec
   rubocop
 

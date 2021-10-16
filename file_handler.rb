@@ -2,7 +2,7 @@
 
 ##
 # Class for locating and validating the file
-class File
+class FileHandler
   attr_reader :file_path
 
   def initialize(file_path)
@@ -11,9 +11,5 @@ class File
 
   def valid_path?
     File.exist?(@file_path)
-  end
-
-  def extension
-    File.extname(@file_path).downcase
   end
 end

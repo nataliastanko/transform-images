@@ -1,20 +1,29 @@
 # frozen_string_literal: true
 
+require 'mini_magick'
+require_relative 'file_handler'
+
 ##
 # Images
-class Image < File
+class Image < FileHandler
   def initialize(file_path)
     super
-    @accepted_formats = ['.jpg', '.jpeg', '.png', '.gif', '.heic']
+    @accepted_formats = %w[JPEG PNG HEIC]
   end
 
   def image?
-    valid_extension?
+    @image = MiniMagick::Image.open(@file_path)
+    valid_image?
   end
 
   private
 
-  def valid_extension?
-    @accepted_formats.include? extension
+  # raises MiniMagick::Invalid if not supported by imagemagic
+  # raises StandardError if not in app accepted format
+  def valid_image?
+    @image.validate!
+    raise StandardError, 'File format not accepted' unless @accepted_formats.include? @image.type
+
+    true
   end
 end

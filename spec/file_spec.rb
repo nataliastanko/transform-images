@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative '../file'
+require_relative '../file_handler'
 
-RSpec.describe File do
+RSpec.describe FileHandler do
   let(:books_file) { described_class.new('data/books.jpeg') }
   let(:holborn_file) { described_class.new('data/Holborn.jpg') }
   let(:greenwich) { described_class.new('data/Greenwich.PNG') }
@@ -26,20 +26,11 @@ RSpec.describe File do
     end
 
     context 'when input file does not exist' do
-      subject(:file) { described_class.new('hello.img') }
+      let(:non_existent_file) { described_class.new('hello.img') }
 
       it 'returns false' do
-        expect(file.valid_path?).to eq false
+        expect(non_existent_file.valid_path?).to eq false
       end
-    end
-  end
-
-  describe '#extension' do
-    it 'returns downcased file extension' do
-      expect(books_file.extension).to eq '.jpeg'
-      expect(holborn_file.extension).to eq '.jpg'
-      expect(greenwich.extension).to eq '.png'
-      expect(not_image.extension).to eq '.pdf'
     end
   end
 end

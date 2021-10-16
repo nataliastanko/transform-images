@@ -16,24 +16,22 @@ Focus todo:
 
 ## Run
 
-## Seolutions to use
+
+### Tests
+
+    rspec --format documentation
+    rubocop
+
+## Solutions used
+
+* [ImageMagick](https://imagemagick.org/index.php)
+* gem [MiniMagick](https://github.com/minimagick/minimagick)
+
+## Requirements
 
 * [ImageMagick](https://imagemagick.org/index.php)
 
+Install examples
+
     brew install imagemagick
     sudo apt-get install imagemagick
-
-or
-
-* [GraphicsMagick](http://www.graphicsmagick.org/)
-
-    brew install graphicsmagick
-
-### Gems to choose from
-
-[rmagick](https://github.com/rmagick/rmagick)
-
-    brew install pkg-config imagemagick
-    sudo apt-get install graphicsmagick
-
-[MiniMagick](https://github.com/minimagick/minimagick)
