@@ -2,10 +2,19 @@
 
 require_relative '../lib/image'
 
+RSpec::Matchers.define :be_resized do |expected|
+  match do |actual|
+    actual[:width] <= expected || actual[:height] <= expected
+  end
+end
+
 RSpec.describe Image do
   let(:image_books) { described_class.new('data/books.jpeg') }
-  let(:image_holborn) { described_class.new('data/Holborn.jpg') }
+  let(:image_holborn) { described_class.new('data/Holborn😄.jpg') }
   let(:image_brighton) { described_class.new('data/Brighton.heic') }
+  let(:image_greenwich) { described_class.new('data/Greenwich.PNG') }
+  let(:image_bags) { described_class.new('data/home-made&bągs).gif') }
+  let(:animation_hogwarts) { described_class.new('data/Hogwarts-animation.gif') }
   let(:pdf) { described_class.new('data/pdf/ImageMagick.pdf') }
   let(:txt) { described_class.new('data/text/file.txt') }
 
@@ -42,22 +51,58 @@ RSpec.describe Image do
   end
 
   describe '#resize' do
-    it 'correctly resizes horizontal image' do
-      books_filename = image_books.resize
-      expect(books_filename).to match %r{^uploads/resized/(.+)_books.jpeg$}
-      expect(File).to exist 'uploads/resized/random_books.jpeg'
-      resized_image_books = described_class.new(books_filename)
-      expect(resized_image_books.dimensions[:width]).to be <= 100
-      expect(resized_image_books.dimensions[:height]).to be <= 100
+    it 'correctly resizes horizontal jpeg image' do
+      filename = image_books.resize
+
+      expect(filename).to match %r{^uploads/resized/(.+)_books.jpeg$}
+      expect(File).to exist filename
+
+      expect(described_class.new(filename).dimensions).to be_resized(100)
     end
 
-    it 'correctly resizes vertical image' do
-      holborn_filename = image_holborn.resize
-      expect(holborn_filename).to match %r{^uploads/resized/(.+)_Holborn.jpg$}
-      expect(File).to exist 'uploads/resized/random_Holborn.jpg'
-      resized_image_holborn = described_class.new(holborn_filename)
-      expect(resized_image_holborn.dimensions[:width]).to be <= 100
-      expect(resized_image_holborn.dimensions[:height]).to be <= 100
+    it 'correctly resizes vertical jpeg image' do
+      filename = image_holborn.resize
+
+      expect(filename).to match %r{^uploads/resized/(.+)_Holborn\u{1F604}.jpg$}
+      expect(File).to exist filename
+
+      expect(described_class.new(filename).dimensions).to be_resized(100)
+    end
+
+    it 'correctly resizes heic image' do
+      filename = image_brighton.resize
+
+      expect(filename).to match %r{^uploads/resized/(.+)_Brighton.heic$}
+      expect(File).to exist filename
+
+      expect(described_class.new(filename).dimensions).to be_resized(100)
+    end
+
+    it 'correctly resizes png image' do
+      filename = image_greenwich.resize
+
+      expect(filename).to match %r{^uploads/resized/(.+)_Greenwich.PNG$}
+      expect(File).to exist filename
+
+      expect(described_class.new(filename).dimensions).to be_resized(100)
+    end
+
+    it 'correctly resizes gif image' do
+      filename = image_bags.resize
+
+      expect(filename).to match %r{^uploads/resized/(.+)_home-made&bągs\).gif$}
+      expect(File).to exist filename
+
+      expect(described_class.new(filename).dimensions).to be_resized(100)
+    end
+
+    it 'correctly resizes gif animation' do
+      filename = animation_hogwarts.resize
+
+      expect(filename).to match %r{^uploads/resized/(.+)_Hogwarts-animation.gif$}
+      expect(File).to exist filename
+
+      expect(described_class.new(filename).dimensions).to be_resized(100)
     end
   end
 

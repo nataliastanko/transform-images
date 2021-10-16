@@ -8,6 +8,7 @@ This should have two endpoints:
 Focus todo:
 
 - check size of the file
+- generate random image name
 
 * Code clarity
 * Smart architectural decisions

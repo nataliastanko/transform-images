@@ -6,7 +6,7 @@ require_relative 'file_handler'
 ##
 # Images
 class Image < FileHandler
-  ACCEPTED_FORMATS = %w[JPEG PNG HEIC].freeze
+  ACCEPTED_FORMATS = %w[JPEG PNG HEIC GIF].freeze
   RESIZE_TO = '100x100'
 
   def initialize(file_path)
