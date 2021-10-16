@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'fileutils'
-require_relative 'file_gen_utils'
-
 ##
 # Class for locating and validating the file
 class FileHandler

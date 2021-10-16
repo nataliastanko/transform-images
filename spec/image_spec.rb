@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/image'
+require_relative '../lib/img_transformer'
 
 RSpec::Matchers.define :be_resized do |expected|
   match do |actual|

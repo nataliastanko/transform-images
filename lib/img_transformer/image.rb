@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'mini_magick'
-require_relative 'file_handler'
-
 ##
 # Images
 class Image < FileHandler
