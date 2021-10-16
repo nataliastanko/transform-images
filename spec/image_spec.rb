@@ -18,7 +18,7 @@ RSpec.describe Image do
 
     context 'when input file does not have the app accepted format' do
       it 'raises exception' do
-        expect { pdf }.to raise_error(StandardError)
+        expect { pdf }.to raise_error(StandardError, 'File format not accepted')
       end
     end
   end

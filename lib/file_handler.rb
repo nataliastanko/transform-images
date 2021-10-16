@@ -7,9 +7,13 @@ class FileHandler
 
   def initialize(file_path)
     @file_path = file_path
+    validate_path
   end
 
-  def valid_path?
-    File.exist?(@file_path)
+  private
+
+  # raises ArgumentError if file does not exist
+  def validate_path
+    raise ArgumentError, 'File does not exist' unless File.exist?(@file_path)
   end
 end

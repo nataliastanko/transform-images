@@ -15,22 +15,11 @@ RSpec.describe FileHandler do
     expect(not_image.file_path).to eq('data/pdf/ImageMagick.pdf')
   end
 
-  describe '#valid_path?' do
-    context 'when input file does exist' do
-      it 'returns true' do
-        expect(books_file.valid_path?).to eq true
-        expect(holborn_file.valid_path?).to eq true
-        expect(greenwich.valid_path?).to eq true
-        expect(not_image.valid_path?).to eq true
-      end
-    end
+  context 'when input file does not exist' do
+    let(:non_existent_file) { described_class.new('hello.img') }
 
-    context 'when input file does not exist' do
-      let(:non_existent_file) { described_class.new('hello.img') }
-
-      it 'returns false' do
-        expect(non_existent_file.valid_path?).to eq false
-      end
+    it 'raises ArgumentError' do
+      expect { non_existent_file }.to raise_error(ArgumentError, 'File does not exist')
     end
   end
 end
