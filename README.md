@@ -7,6 +7,9 @@ This should have two endpoints:
 
 Focus todo:
 
+- check size of the file
+- check if file is the actual image
+
 * Code clarity
 * Smart architectural decisions
 * Wise use of encapsulation and abstraction
