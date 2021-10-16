@@ -40,4 +40,28 @@ RSpec.describe Image do
       expect(image_brighton.metadata).to eq image_brighton_metadata
     end
   end
+
+  describe '#resize' do
+    it 'correctly resizes horizontal image' do
+      books_filename = image_books.resize
+      expect(books_filename).to match %r{^uploads/resized/(.+)_books.jpeg$}
+      expect(File).to exist 'uploads/resized/random_books.jpeg'
+      resized_image_books = described_class.new(books_filename)
+      expect(resized_image_books.dimensions[:width]).to be <= 100
+      expect(resized_image_books.dimensions[:height]).to be <= 100
+    end
+
+    it 'correctly resizes vertical image' do
+      holborn_filename = image_holborn.resize
+      expect(holborn_filename).to match %r{^uploads/resized/(.+)_Holborn.jpg$}
+      expect(File).to exist 'uploads/resized/random_Holborn.jpg'
+      resized_image_holborn = described_class.new(holborn_filename)
+      expect(resized_image_holborn.dimensions[:width]).to be <= 100
+      expect(resized_image_holborn.dimensions[:height]).to be <= 100
+    end
+  end
+
+  after(:all) do
+    FileUtils.rm_rf('uploads') if Dir.exist?('uploads')
+  end
 end

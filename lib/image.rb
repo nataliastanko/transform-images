@@ -7,6 +7,7 @@ require_relative 'file_handler'
 # Images
 class Image < FileHandler
   ACCEPTED_FORMATS = %w[JPEG PNG HEIC].freeze
+  RESIZE_TO = '100x100'
 
   def initialize(file_path)
     super
@@ -20,6 +21,13 @@ class Image < FileHandler
 
   def dimensions
     { width: @image.width, height: @image.height }
+  end
+
+  def resize
+    create_directory
+    @image.resize RESIZE_TO
+    @image.write new_file_path
+    new_file_path
   end
 
   private
