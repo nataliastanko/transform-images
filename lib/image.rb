@@ -9,8 +9,8 @@ class Image < FileHandler
   ACCEPTED_FORMATS = %w[JPEG PNG HEIC GIF].freeze
   RESIZE_TO = '100x100'
 
-  def initialize(file_path)
-    super
+  def initialize(file_path, upload_dir = 'uploads/resized/')
+    super(file_path, upload_dir)
     @image = MiniMagick::Image.open(@file_path)
     validate_image
   end

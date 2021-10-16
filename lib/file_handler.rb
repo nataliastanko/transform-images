@@ -1,26 +1,28 @@
 # frozen_string_literal: true
 
 require 'fileutils'
+require_relative 'file_gen_utils'
 
 ##
 # Class for locating and validating the file
 class FileHandler
-  attr_reader :file_path
+  include FileGenUtils
 
-  def initialize(file_path)
+  attr_reader :file_path, :new_file_path
+
+  def initialize(file_path, upload_dir = 'uploads')
     @file_path = file_path
-    @upload_dir = 'uploads/resized/'
     validate_path
-  end
-
-  protected
-
-  def new_file_path
-    filename = File.basename(file_path)
-    "#{@upload_dir}random_#{filename}"
+    @upload_dir = upload_dir
+    @new_file_path = build_new_file_path
   end
 
   private
+
+  def build_new_file_path
+    filename = File.basename(file_path)
+    @new_file_path = "#{@upload_dir}#{random}_#{filename}"
+  end
 
   # raises ArgumentError if file does not exist
   def validate_path
