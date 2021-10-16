@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../file_handler'
+require_relative '../lib/file_handler'
 
 RSpec.describe FileHandler do
   let(:books_file) { described_class.new('data/books.jpeg') }

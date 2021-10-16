@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../image'
+require_relative '../lib/image'
 
 RSpec.describe Image do
   let(:image_books) { described_class.new('data/books.jpeg') }
