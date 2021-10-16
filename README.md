@@ -1,4 +1,4 @@
-# Simple API to resize images.
+# Simple API to resize images
 
 This should have two endpoints:
 
@@ -8,7 +8,6 @@ This should have two endpoints:
 Focus todo:
 
 - check size of the file
-- generate random image name
 
 * Code clarity
 * Smart architectural decisions
