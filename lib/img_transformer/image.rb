@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'mini_magick'
+
 ##
 # Images
 class Image < FileHandler
@@ -21,7 +23,7 @@ class Image < FileHandler
   end
 
   def resize
-    create_directory
+    create_directory(@upload_dir)
     @image.resize RESIZE_TO
     @image.write new_file_path
     new_file_path

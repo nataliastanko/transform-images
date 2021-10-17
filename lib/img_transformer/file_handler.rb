@@ -5,7 +5,7 @@
 class FileHandler
   include FileGenUtils
 
-  attr_reader :file_path, :new_file_path
+  attr_reader :file_path, :new_file_path, :upload_dir
 
   def initialize(file_path, upload_dir = 'uploads')
     @file_path = file_path
@@ -24,9 +24,5 @@ class FileHandler
   # raises ArgumentError if file does not exist
   def validate_path
     raise ArgumentError, 'File does not exist' unless File.exist?(@file_path)
-  end
-
-  def create_directory
-    FileUtils.mkdir_p(@upload_dir) unless File.directory?(@upload_dir)
   end
 end

@@ -7,6 +7,7 @@ This should have two endpoints:
 
 Focus todo:
 
+- validate coming params to request
 - check size of the file
 
 * Code clarity
@@ -14,6 +15,11 @@ Focus todo:
 * Wise use of encapsulation and abstraction
 
 ## Run
+
+    ruby app.rb
+
+    curl -i -X POST -H 'content-type: multipart/form-data' -F file=@data/Greenwich.PNG http://127.0.0.1:4040/api/v1/validate
+    curl -X POST -H 'content-type: multipart/form-data' -F file=@data/Greenwich.PNG http://127.0.0.1:4040/api/v1/validate
 
 
 ### Tests
