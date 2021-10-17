@@ -17,6 +17,7 @@ RSpec.describe Image do
   let(:animation_hogwarts) { described_class.new('data/Hogwarts-animation.gif') }
   let(:pdf) { described_class.new('data/pdf/ImageMagick.pdf') }
   let(:txt) { described_class.new('data/text/file.txt') }
+  let(:text_as_png) { described_class.new('data/text/file.png') }
 
   context 'when input file is a recognised image' do
     it 'successfully creates object' do
@@ -27,14 +28,15 @@ RSpec.describe Image do
 
     context 'when input file does not have the app accepted format' do
       it 'raises exception' do
-        expect { pdf }.to raise_error(StandardError, 'File format not accepted')
+        expect { pdf }.to raise_error(ArgumentError, 'File format not accepted')
       end
     end
   end
 
   context 'when input file is not a recognised image' do
     it 'raises exception' do
-      expect { txt }.to raise_error(MiniMagick::Invalid)
+      expect { txt }.to raise_error(ArgumentError, 'File format not an image')
+      expect { text_as_png }.to raise_error(ArgumentError, 'File format not an image')
     end
   end
 

@@ -18,5 +18,7 @@ class UploadHandler
     create_directory @tmp_dir
     FileUtils.copy(@tempfile.path, @input_image_path)
     @input_image_path
+  rescue StandardError
+    raise ArgumentError, 'Invalid parameters'
   end
 end

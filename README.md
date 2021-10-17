@@ -5,10 +5,14 @@ This should have two endpoints:
 * An endpoint which will validate your file is an image and return key metadata (filetype, size, dimensions)
 * An endpoint which will return a resized version of your image file
 
-Focus todo:
+Todo:
 
 - validate coming params to request
 - check size of the file
+- log errors
+- handle_empty_content when empty POST body
+- custom ACCEPTED_FORMATS and RESIZE_TO
+- check tests coverage
 
 * Code clarity
 * Smart architectural decisions

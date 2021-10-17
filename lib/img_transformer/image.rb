@@ -10,7 +10,6 @@ class Image < FileHandler
 
   def initialize(file_path, upload_dir = 'uploads/resized/')
     super(file_path, upload_dir)
-    @image = MiniMagick::Image.open(@file_path)
     validate_image
   end
 
@@ -31,10 +30,16 @@ class Image < FileHandler
 
   private
 
-  # raises MiniMagick::Invalid if not supported by imagemagic
-  # raises StandardError if not in app accepted format
+  # raises ArgumentError if file not supported by imagemagic
+  # raises ArgumentError if file not in app accepted format
   def validate_image
-    @image.validate!
-    raise StandardError, 'File format not accepted' unless ACCEPTED_FORMATS.include? @image.type
+    begin
+      @image = MiniMagick::Image.open(@file_path)
+      @image.validate!
+    rescue MiniMagick::Invalid
+      raise ArgumentError, 'File format not an image'
+    end
+
+    raise ArgumentError, 'File format not accepted' unless ACCEPTED_FORMATS.include? @image.type
   end
 end

@@ -1,10 +1,18 @@
 # frozen_string_literal: true
 
+# set :environment, :production
+
+
 require 'sinatra'
 require 'sinatra/contrib'
 require 'sinatra/reloader' if development?
 require_relative 'lib/services/upload_handler'
+require_relative 'lib/services/params_validator'
 require_relative 'lib/img_transformer'
+
+# configure :development do
+#   disable :show_exceptions
+# end
 
 set :port, 4040
 
@@ -15,13 +23,15 @@ namespace '/api' do
       json status: 'OK'
     end
 
+    # post '/metadata', provides: json do
     post '/metadata' do
-      filename = request.params['file'][:filename]
-      tempfile = request.params['file'][:tempfile]
-
-      input_image_path = UploadHandler.new(filename, tempfile).copy_uploaded_file
-
-      image = Image.new input_image_path
+      begin
+        params = ParamsValidator.new(request.params).validate
+        input_image_path = UploadHandler.new(params['file'][:filename], params['file'][:tempfile]).copy_uploaded_file
+        image = Image.new input_image_path
+      rescue ArgumentError => e
+        halt 422, json({ error: e })
+      end
 
       content_type :json
       json image.metadata
