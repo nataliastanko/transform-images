@@ -38,10 +38,11 @@ In app dir
 
 ## Features
 
-- sinastra app
-- validating input file format
+- sinatra app
+- api with JSON responses
+- validating api params and image input file format
 - returns image metadata
-- resizes image
+- returns resized image
 - tests 100.0% coverge
 
 ## Todo:
