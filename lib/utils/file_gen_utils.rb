@@ -13,8 +13,4 @@ module FileGenUtils
   def random
     SecureRandom.hex 8
   end
-
-  # class << self
-  #   include FileGenUtils
-  # end
 end
