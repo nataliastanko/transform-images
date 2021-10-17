@@ -14,6 +14,10 @@ class FileHandler
     @new_file_path = build_new_file_path
   end
 
+  def basename
+    File.basename @new_file_path
+  end
+
   private
 
   def build_new_file_path

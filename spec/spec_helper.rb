@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'simplecov'
+SimpleCov.start
+
 ENV['APP_ENV'] = 'test'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

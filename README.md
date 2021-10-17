@@ -11,7 +11,7 @@ This should have two endpoints:
 - [ImageMagick](https://imagemagick.org/index.php)
 - gem dependencies
 
-    bundle install
+    ```bundle install```
 
 ## Run
 
@@ -19,25 +19,33 @@ This should have two endpoints:
 
 ## Usage
 
+In app dir
+
 /api/v1/metadata
 
     curl -X POST -H 'content-type: multipart/form-data' -F file=@data/Greenwich.PNG http://127.0.0.1:4040/api/v1/metadata
+    curl -X POST -H 'content-type: multipart/form-data' -F file=@data/pdf/ImageMagick.pdf http://127.0.0.1:4040/api/v1/metadata
 
 /api/v1/resize
 
-    curl -X POST -H 'content-type: multipart/form-data' -F file=@data/Greenwich.PNG http://127.0.0.1:4040/api/v1/resize
-
+    curl -X POST -H 'content-type: multipart/form-data' -F file=@data/Brighton.heic http://127.0.0.1:4040/api/v1/resize
+    curl -X POST -H 'content-type: multipart/form-data' -F file=@data/Hogwarts-animation.gif http://127.0.0.1:4040/api/v1/resize
 
 ## Tests
 
-    rspec --format documentation
+    rspec
     rubocop
 
+## Features
+
+- sinastra app
+- validating input file format
+- returns image metadata
+- resizes image
+- tests 100.0% coverge
 
 ## Todo:
 
 - check size of the file
-- log errors
 - handle_empty_content when empty POST body
 - custom ACCEPTED_FORMATS and RESIZE_TO
-- check tests coverage

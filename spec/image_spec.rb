@@ -48,7 +48,7 @@ RSpec.describe Image do
 
   describe '#resize' do
     it 'correctly resizes horizontal jpeg image' do
-      filename = image_books.resize
+      filename = image_books.resize.new_file_path
 
       expect(filename).to match %r{^uploads/resized/(.+)_books.jpeg$}
       expect(File).to exist filename
@@ -57,7 +57,7 @@ RSpec.describe Image do
     end
 
     it 'correctly resizes vertical jpeg image' do
-      filename = image_holborn.resize
+      filename = image_holborn.resize.new_file_path
 
       expect(filename).to match %r{^uploads/resized/(.+)_Holborn\u{1F604}.jpg$}
       expect(File).to exist filename
@@ -66,7 +66,7 @@ RSpec.describe Image do
     end
 
     it 'correctly resizes heic image' do
-      filename = image_brighton.resize
+      filename = image_brighton.resize.new_file_path
 
       expect(filename).to match %r{^uploads/resized/(.+)_Brighton.heic$}
       expect(File).to exist filename
@@ -75,7 +75,7 @@ RSpec.describe Image do
     end
 
     it 'correctly resizes png image' do
-      filename = image_greenwich.resize
+      filename = image_greenwich.resize.new_file_path
 
       expect(filename).to match %r{^uploads/resized/(.+)_Greenwich.PNG$}
       expect(File).to exist filename
@@ -84,7 +84,7 @@ RSpec.describe Image do
     end
 
     it 'correctly resizes gif image' do
-      filename = image_bags.resize
+      filename = image_bags.resize.new_file_path
 
       expect(filename).to match %r{^uploads/resized/(.+)_home-made&bągs\).gif$}
       expect(File).to exist filename
@@ -93,7 +93,7 @@ RSpec.describe Image do
     end
 
     it 'correctly resizes gif animation' do
-      filename = animation_hogwarts.resize
+      filename = animation_hogwarts.resize.new_file_path
 
       expect(filename).to match %r{^uploads/resized/(.+)_Hogwarts-animation.gif$}
       expect(File).to exist filename

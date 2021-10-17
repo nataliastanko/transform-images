@@ -25,7 +25,7 @@ class Image < FileHandler
     create_directory(@upload_dir)
     @image.resize RESIZE_TO
     @image.write new_file_path
-    new_file_path
+    self
   end
 
   private
