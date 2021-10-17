@@ -2,12 +2,6 @@
 
 require_relative '../lib/img_transformer'
 
-RSpec::Matchers.define :be_resized do |expected|
-  match do |actual|
-    actual[:width] <= expected || actual[:height] <= expected
-  end
-end
-
 RSpec.describe Image do
   let(:image_books) { described_class.new('data/books.jpeg') }
   let(:image_holborn) { described_class.new('data/Holborn😄.jpg') }

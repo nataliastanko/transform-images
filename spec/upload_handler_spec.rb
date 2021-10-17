@@ -17,8 +17,9 @@ RSpec.describe UploadHandler do
     end
 
     context 'when arguments invalid' do
+      let(:invalid_service_call) { described_class.new(image_bags_dir, nil).copy_uploaded_file }
       it 'raises exception' do
-        expect { described_class.new(image_bags_dir, nil).copy_uploaded_file }.to raise_error(ArgumentError, 'Invalid parameters')
+        expect { invalid_service_call }.to raise_error(ArgumentError, 'Invalid parameters')
       end
     end
   end

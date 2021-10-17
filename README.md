@@ -5,42 +5,39 @@ This should have two endpoints:
 * An endpoint which will validate your file is an image and return key metadata (filetype, size, dimensions)
 * An endpoint which will return a resized version of your image file
 
-Todo:
+## App requirements
 
-- validate coming params to request
-- check size of the file
-- log errors
-- handle_empty_content when empty POST body
-- custom ACCEPTED_FORMATS and RESIZE_TO
-- check tests coverage
+- ruby 3.0.2
+- [ImageMagick](https://imagemagick.org/index.php)
+- gem dependencies
 
-* Code clarity
-* Smart architectural decisions
-* Wise use of encapsulation and abstraction
+    bundle install
 
 ## Run
 
     ruby app.rb
 
-    curl -i -X POST -H 'content-type: multipart/form-data' -F file=@data/Greenwich.PNG http://127.0.0.1:4040/api/v1/validate
-    curl -X POST -H 'content-type: multipart/form-data' -F file=@data/Greenwich.PNG http://127.0.0.1:4040/api/v1/validate
+## Usage
+
+/api/v1/metadata
+
+    curl -X POST -H 'content-type: multipart/form-data' -F file=@data/Greenwich.PNG http://127.0.0.1:4040/api/v1/metadata
+
+/api/v1/resize
+
+    curl -X POST -H 'content-type: multipart/form-data' -F file=@data/Greenwich.PNG http://127.0.0.1:4040/api/v1/resize
 
 
-### Tests
+## Tests
 
     rspec --format documentation
     rubocop
 
-## Solutions used
 
-* [ImageMagick](https://imagemagick.org/index.php)
-* gem [MiniMagick](https://github.com/minimagick/minimagick)
+## Todo:
 
-## Requirements
-
-* [ImageMagick](https://imagemagick.org/index.php)
-
-Install examples
-
-    brew install imagemagick
-    sudo apt-get install imagemagick
+- check size of the file
+- log errors
+- handle_empty_content when empty POST body
+- custom ACCEPTED_FORMATS and RESIZE_TO
+- check tests coverage

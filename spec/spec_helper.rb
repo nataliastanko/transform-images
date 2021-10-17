@@ -14,3 +14,9 @@ RSpec.configure do |config|
 
   config.shared_context_metadata_behavior = :apply_to_host_groups
 end
+
+RSpec::Matchers.define :be_resized do |expected|
+  match do |actual|
+    actual[:width] <= expected || actual[:height] <= expected
+  end
+end
